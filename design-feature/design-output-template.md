@@ -32,6 +32,12 @@ Include decisions reached through the user dialogue. Distinguish agreed decision
 
 Use "module or construct" broadly: it may be a class, interface/protocol, function module, state owner, data type, adapter, or another paradigm-appropriate unit.
 
+### Implementation boundary
+
+- Treat the accepted list of files to create, modify, or delete as a hard implementation boundary.
+- If implementation requires work on any file outside that list, obtain explicit user confirmation before proceeding unless the user has explicitly authorized automatic progression, for example, "don't ask, just do it."
+- Never implement behavior, scope, or file changes beyond the accepted design.
+
 ### Public contracts and data flow
 
 Give language-appropriate signatures or pseudocode. Describe caller-visible invariants, validation, results, errors, ordering, idempotency, side effects, and performance constraints only where relevant. Keep implementation details behind the interface.
@@ -107,3 +113,5 @@ Order slices from the thinnest end-to-end success path through important failure
 - Diagrams match the written dependencies and behavior.
 - Meaningful choices are agreed; remaining assumptions are explicit.
 - TDD slices are independently executable in red-green-refactor order.
+- The implementation boundary and the confirmation requirement for unplanned file work are explicit.
+- No implementation step exceeds the accepted design.

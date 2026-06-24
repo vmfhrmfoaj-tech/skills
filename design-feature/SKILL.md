@@ -91,7 +91,7 @@ After the public interface and behavior are stable, invoke `$tdd` to produce a t
 - Order work as vertical tracer bullets: one failing behavior test, minimal implementation to green, then the next behavior.
 - Identify unit, integration, contract, end-to-end, or other test levels only where they add distinct confidence.
 - Prefer real internal collaborators. Put test doubles at external systems, time, randomness, filesystem, or other genuine seams.
-- Include critical success, failure, edge, and regression scenarios, prioritized by risk.
+- Include critical success, failure, edge, corner, and regression scenarios, prioritized by risk.
 - Reserve refactoring and SOLID cleanup for green states.
 - Do not prescribe tests for private methods, internal call counts, or speculative implementation shape.
 
