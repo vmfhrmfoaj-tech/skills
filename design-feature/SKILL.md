@@ -74,14 +74,16 @@ If no meaningful ambiguity remains, state the ownership choice and rationale wit
 
 Turn agreed responsibilities into concrete interfaces, modules, types, and file placement. Specify:
 
+- Design in enough detail that a developer can implement directly from the design document alone, without needing to invent function signatures, interface shapes, ownership, data flow, failure semantics, or test boundaries. When in doubt, make the design more explicit.
 - Each module's responsibility, owner, callers, dependencies, and reason to change.
 - Public operations and data types, including invariants, errors, ordering, idempotency, and side effects where applicable.
+- Always include signatures for interfaces connected to end users or common-feature users such as developers, and for every important function or interface named in the design. Use language-appropriate signatures or pseudocode that include the function, method, interface, event, callback, or command name; input parameters and types; return type or result shape; asynchronous, concurrent, or paradigm-specific execution behavior; caller-visible error/result contract; and important side effects or idempotency constraints.
 - State ownership and the data/control flow across seams.
 - Adapters for real external or runtime variation.
 - Files to add, modify, or retire, grouped by responsibility rather than arbitrary layer.
 - Migration, compatibility, rollout, and observability only when the feature requires them.
 
-Always include a Mermaid structural or dependency diagram. Use `classDiagram` only when classes and their relationships are the clearest representation; otherwise use `flowchart`. Add a Mermaid `sequenceDiagram` when behavior crosses multiple modules or seams and ordering materially matters.
+Always include a Mermaid structural or dependency diagram. Use `classDiagram` only when classes and their relationships are the clearest representation; otherwise use `flowchart`. Add a Mermaid `sequenceDiagram` when behavior crosses multiple modules or seams and ordering materially matters. When diagrams would reduce implementation ambiguity, include as many as are useful, such as dependency/structure, sequence, state, data flow, lifecycle, or module boundary diagrams. Diagrams must clarify implementation decisions rather than decorate the document, and every diagram must agree with the written responsibilities, call direction, state transitions, and data flow.
 
 ### 6. Add the TDD implementation strategy
 

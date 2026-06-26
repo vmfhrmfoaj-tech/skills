@@ -40,7 +40,9 @@ Use "module or construct" broadly: it may be a class, interface/protocol, functi
 
 ### Public contracts and data flow
 
-Give language-appropriate signatures or pseudocode. Describe caller-visible invariants, validation, results, errors, ordering, idempotency, side effects, and performance constraints only where relevant. Keep implementation details behind the interface.
+Design in enough detail that a developer can implement directly from this design document alone, without needing to invent function signatures, interface shapes, ownership, data flow, failure semantics, or test boundaries.
+
+Give language-appropriate signatures or pseudocode as a required contract, not an optional sketch. Always include signatures for interfaces connected to end users or common-feature users such as developers, and for every important function or interface named in the design. Include the function, method, interface, event, callback, or command name; input parameters and types; return type or result shape; asynchronous, concurrent, or paradigm-specific execution behavior; caller-visible error/result contract; and important side effects or idempotency constraints. Describe caller-visible invariants, validation, results, errors, ordering, side effects, and performance constraints only where relevant. Keep implementation details behind the interface.
 
 ### Failure and compatibility behavior
 
@@ -88,6 +90,8 @@ sequenceDiagram
 
 Replace all template names and arrows with the real design. Ensure diagram direction agrees with the dependency description.
 
+When diagrams would reduce implementation ambiguity, include as many as are useful: dependency/structure, sequence, state, data flow, lifecycle, or module boundary diagrams. Diagrams must clarify implementation decisions rather than decorate the document, and every diagram must agree with the written responsibilities, call direction, state transitions, and data flow.
+
 ## 7. TDD implementation strategy
 
 ### Requirement traceability
@@ -109,8 +113,10 @@ Order slices from the thinnest end-to-end success path through important failure
 
 - Every requirement has an owner and observable test.
 - Public interfaces include necessary invariants and error behavior.
+- The design document is detailed enough for a developer to implement without inventing function signatures or interface shapes.
+- Interfaces connected to end users, common-feature users such as developers, and every important function/interface named in the design include signatures.
 - File placement follows responsibility ownership.
-- Diagrams match the written dependencies and behavior.
+- Necessary diagrams are included, and every diagram matches the written dependencies and behavior.
 - Meaningful choices are agreed; remaining assumptions are explicit.
 - TDD slices are independently executable in red-green-refactor order.
 - The implementation boundary and the confirmation requirement for unplanned file work are explicit.
