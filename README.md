@@ -35,3 +35,8 @@ Mattpocock Skills
 - 글로벌 `write-a-skill` ↔ Matt Pocock `writing-great-skills`
 
 > `.codex/skills/.system`에 기본 제공되는 시스템 스킬은 이 목록의 대상이 아닙니다.
+
+
+```bash
+npx skills@latest add yourname/design-feature
+```

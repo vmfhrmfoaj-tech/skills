@@ -1,4 +1,0 @@
-interface:
-  display_name: "Design Feature"
-  short_description: "Design implementation-ready features with SOLID and TDD"
-  default_prompt: "Use $design-feature to turn this requirement into an implementation-ready design with explicit ownership, diagrams, and a TDD plan."
