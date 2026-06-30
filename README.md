@@ -38,5 +38,5 @@ Mattpocock Skills
 
 
 ```bash
-npx skills@latest add yourname/design-feature
+npx skills@latest add https://github.com/vmfhrmfoaj-tech/skills --skill design-feature
 ```
