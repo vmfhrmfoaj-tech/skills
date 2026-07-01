@@ -1,6 +1,16 @@
 # Personal Skills
 
-개인적으로 사용하는 에이전트 스킬을 보관하고 점차 확장하기 위한 저장소입니다.
+개인적으로 사용하는 에이전트 스킬을 보관하는 저장소입니다.
+
+## 로컬 스킬
+
+### improve-docs
+
+프로젝트 문서의 구조, 단일 출처(SSOT), ADR/reference 분류, 상대 링크를 정리합니다. 실행 규약은 [improve-docs/SKILL.md](improve-docs/SKILL.md)에 있습니다.
+
+### design-feature
+
+상세한 기능 요구사항을 구현 가능한 기술 중립 설계와 TDD 전략으로 변환합니다. 실행 규약은 [design-feature/SKILL.md](design-feature/SKILL.md)에 있습니다.
 
 ## Matt Pocock Skills
 
@@ -36,7 +46,6 @@ Mattpocock Skills
 
 > `.codex/skills/.system`에 기본 제공되는 시스템 스킬은 이 목록의 대상이 아닙니다.
 
-
-```bash
+```sh
 npx skills@latest add https://github.com/vmfhrmfoaj-tech/skills --skill design-feature
 ```
