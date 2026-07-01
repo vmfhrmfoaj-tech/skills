@@ -1,80 +1,80 @@
 ---
 name: improve-docs
-description: 프로젝트 문서와 링크 구조를 탐색해 파편화, 중복, 잘못된 문서 역할을 진단하고 응집도 높은 문서 구조와 단일 출처(SSOT)로 개선한다. 문서 아키텍처 정리, shallow docs 통합, SSOT 설정, ADR/reference 분류, 중복 제거, 깨진 링크 수정이 필요할 때 사용한다. 단순 오탈자나 문구 하나만 고치는 작업에는 사용하지 않는다.
+description: Explore a project's documentation and link structure to identify fragmentation, duplication, and unclear document roles, then improve them by creating a cohesive documentation architecture with clear single sources of truth (SSOTs). Use for documentation architecture cleanup, consolidation of shallow docs, SSOT designation, ADR/reference classification, duplicate removal, and broken-link repair. Do not use for isolated typo fixes or a single wording change.
 ---
 
 # Improve Docs
 
-문서 탐색 비용과 중복 유지 비용을 줄인다. 관련 정보는 함께 이해할 수 있게 모으고, 같은 사실은 권위 있는 한 곳에서만 관리하며, 독자가 적은 수의 문서를 열고도 필요한 정보를 찾게 한다.
+Reduce the cost of navigating and maintaining documentation. Keep related information together so readers can understand it in context. Maintain each fact in one authoritative location, and enable readers to find what they need by opening as few documents as possible.
 
-대상 경로나 목표가 주어지면 작업 범위로 사용한다. 주어지지 않으면 저장소 전체 문서를 조사하되, 실제 수정 범위는 후보 제시와 사용자 선택을 거쳐 정한다.
+If the user provides a target path or goal, treat it as the scope of the investigation. Otherwise, investigate documentation across the repository, but do not modify anything until you have presented candidate improvements and the user has selected their scope.
 
-## 판단 기준
+## Evaluation Criteria
 
-다음 질문으로 문서 구조의 마찰을 찾는다. 체크리스트 점수만으로 결론 내리지 말고, 저장소를 탐색하면서 실제로 겪은 왕복과 혼란을 근거로 판단한다.
+Use the following questions to identify friction in the documentation structure. Do not base conclusions on a checklist score alone. Base them on the actual navigation overhead and confusion encountered while exploring the repository.
 
-- 한 개념을 이해하려면 여러 짧은 문서를 반복해서 오가야 하는가?
-- 문서가 유용한 정보를 직접 제공하지 않고 다른 위치로 안내만 하는가?
-- 같은 사실이 여러 문서에서 독립적으로 유지되는가?
-- 결정 당시의 맥락을 보존하는 ADR과 계속 갱신되는 reference의 역할이 섞였는가?
-- 문서를 없애고 내용을 정본에 합치면 탐색과 유지가 더 단순해지는가?
-- 진입 문서, 제목, 링크만 보고 필요한 정보의 위치와 문서 역할을 예측할 수 있는가?
+- Must a reader repeatedly move between several short documents to understand one concept?
+- Does a document merely redirect the reader instead of providing useful information itself?
+- Is the same fact maintained independently in multiple documents?
+- Are the roles of ADRs, which preserve decision-time context, and continuously updated references mixed together?
+- Would removing a document and merging its content into the canonical source simplify navigation and maintenance?
+- Can readers predict where information lives and what role a document serves from entry-point documents, titles, and links alone?
 
-같은 주제, 독자, 변경 주기를 가진 문서는 통합 후보로 본다. 변경 주기가 다르거나 독립적으로 읽어야 하는 문서는 억지로 합치지 않는다.
+Treat documents with the same topic, audience, and change cadence as consolidation candidates. Do not force documents together when their change cadences differ or they need to be read independently.
 
-## 프로세스
+## Process
 
-### 1. 탐색
+### 1. Explore
 
-먼저 저장소 지침과 루트 진입 문서를 읽는다. 그다음 대상 범위의 문서 트리, 문서별 역할, 상대 링크, 앵커, 고립된 문서와 깨진 링크를 조사한다.
+First, read the repository instructions and root entry-point documents. Then inspect the documentation tree within scope, each document's role, relative links, anchors, orphaned documents, and broken links.
 
-문서가 설명하는 코드와 설정을 읽어 사실을 확인한다. 코드와 설정은 근거로만 사용하며 이 스킬로 수정하지 않는다. 기존 ADR을 읽고 이미 결정된 사안을 근거 없이 다시 제안하지 않는다.
+Read the code and configuration described by the documentation to verify facts. Use code and configuration only as evidence; do not modify them with this skill. Read existing ADRs, and do not reopen settled decisions without evidence.
 
-### 2. 개선 후보 도출
+### 2. Identify Improvement Candidates
 
-탐색 중 실제로 발생한 마찰을 기준으로 관련 문서를 클러스터링한다. 각 후보에 다음 정보를 포함한다.
+Cluster related documents according to friction actually encountered during exploration. Include the following information for every candidate:
 
-- **대상**: 관련 문서와 다루는 주제
-- **문제**: 탐색 왕복, 중복, 역할 혼동, 링크 단절 등 확인된 마찰
-- **변경안**: 유지, 통합, 이동, 삭제와 정본으로 삼을 문서
-- **효과**: 탐색 비용과 중복 유지 비용이 어떻게 줄어드는지
-- **위험**: 정보 손실, 외부 링크 단절, 변경 주기 충돌 등 주의점
-- **추천 강도**: `강력 추천`, `검토 가치 있음`, `추측적` 중 하나
+- **Scope**: The relevant documents and the topic they cover
+- **Problem**: Observed friction, such as navigation overhead, duplication, unclear roles, or broken links
+- **Proposed change**: What to keep, consolidate, move, or delete, and which document should become the canonical source
+- **Benefit**: How the change reduces navigation and duplicate-maintenance costs
+- **Risk**: Potential information loss, broken external links, conflicting change cadences, or other concerns
+- **Recommendation strength**: One of `Strongly recommended`, `Worth considering`, or `Speculative`
 
-후보가 없으면 억지로 만들지 말고 조사 범위와 개선이 불필요한 이유를 보고한다.
+If there are no worthwhile candidates, do not invent any. Report what you investigated and why no improvement is necessary.
 
-### 3. 후보 제시 및 승인
+### 3. Present Candidates and Obtain Approval
 
-후보를 추천 순서로 채팅에 제시하고 가장 먼저 처리할 후보와 이유를 밝힌다. 별도 계획 문서나 HTML 보고서를 만들지 않는다.
+Present candidates in recommendation order in the chat. State which candidate should be addressed first and why. Do not create a separate planning document or HTML report.
 
-통합, 이동, 삭제처럼 문서 구조를 바꾸는 작업은 사용자가 후보를 선택하고 변경 범위를 명시적으로 승인할 때까지 수행하지 않는다. 승인을 기다리는 동안에는 문서를 수정하지 않는다. 단순 링크 수정이나 문구 압축도 승인된 범위를 벗어나면 다시 알린다.
+Do not make structural documentation changes—such as consolidation, relocation, or deletion—until the user selects a candidate and explicitly approves the scope. Do not modify documents while waiting for approval. If a simple link repair or wording reduction falls outside the approved scope, disclose it and obtain approval before proceeding.
 
-### 4. 수정
+### 4. Modify
 
-선택된 클러스터를 한 번에 하나씩 처리한다. 작은 diff를 유지하며 다음 원칙을 따른다.
+Process one selected documentation cluster at a time. Keep diffs small and follow these principles:
 
-- 중복된 사실은 가장 권위 있고 변경이 먼저 반영되는 문서 하나에 남기고 나머지는 상대 링크로 바꾼다.
-- 파편을 통합할 때 고유명사, 명령, 코드, 오류 메시지, 근거와 의미를 보존한다.
-- 날짜와 근거가 고정되는 결정은 ADR에 둔다. 용어집, 현황, 운영 절차처럼 계속 바뀌는 정보는 살아 있는 reference에 둔다.
-- 이동하거나 삭제한 문서를 가리키는 모든 내부 참조를 갱신한다.
-- 저장소의 문체, 위치, 파일명, frontmatter와 링크 규칙을 따른다. 저장소가 요구하지 않는 스키마를 새로 강제하지 않는다.
+- Keep each duplicated fact in the single document that is most authoritative and updated first. Replace other copies with relative links.
+- When consolidating fragments, preserve proper nouns, commands, code, error messages, evidence, and meaning.
+- Keep decisions whose date and rationale are fixed in ADRs. Keep continuously changing information—such as glossaries, current status, and operational procedures—in living references.
+- Update every internal reference to a document that was moved or deleted.
+- Follow the repository's conventions for prose style, location, filenames, frontmatter, and links. Do not impose a new schema unless the repository requires it.
 
-### 5. 검증 및 보고
+### 5. Validate and Report
 
-수정 후 다음을 검증한다.
+After making changes, verify all of the following:
 
-- 이동하거나 삭제한 경로를 가리키는 참조가 남지 않았는가?
-- 상대 링크와 문서 내부 앵커가 실제 대상을 가리키는가?
-- 진입 문서와 인덱스가 현재 문서 구조를 정확히 보여 주는가?
-- 통합 전의 사실, 제약, 결정 근거가 누락되거나 의미가 달라지지 않았는가?
-- 승인된 클러스터에 같은 사실을 반복하는 문서가 남아 있지 않은가?
+- No references remain to paths that were moved or deleted.
+- Relative links and internal anchors resolve to real targets.
+- Entry-point documents and indexes accurately reflect the current documentation structure.
+- No facts, constraints, or decision rationale from before the consolidation were omitted or had their meaning changed.
+- No document within the approved cluster still duplicates a fact maintained elsewhere in that cluster.
 
-변경한 문서, 정한 SSOT, 수행한 검증, 해결하지 못한 위험을 사용자에게 보고한다.
+Report the documents changed, the designated SSOTs, the validation performed, and any unresolved risks.
 
-## 안전 경계
+## Safety Boundaries
 
-- 문서 파일만 수정한다. 코드, 런타임 설정, 타입, 생성 산출물은 변경하지 않는다.
-- 저장소 지침과 사용자 요청이 충돌하면 작업을 멈추고 충돌을 설명한다.
-- 불확실한 내용을 추측해 새로운 사실이나 정본을 만들지 않는다. 코드, 설정, ADR 또는 사용자에게서 근거를 확보한다.
-- 통합 과정에서 정보를 버리지 않는다. 삭제 가치가 불분명하면 유지하고 위험으로 보고한다.
-- 사용자가 승인한 후보와 범위를 넘어서는 변경은 수행하지 않는다.
+- Modify documentation files only. Do not change code, runtime configuration, types, or generated artifacts.
+- If repository instructions conflict with the user's request, stop and explain the conflict.
+- Do not invent uncertain facts or designate an unsupported canonical source. Obtain evidence from code, configuration, ADRs, or the user.
+- Do not discard information during consolidation. If the value of deleting something is unclear, preserve it and report the risk.
+- Do not make changes beyond the candidates and scope approved by the user.
