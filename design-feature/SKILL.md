@@ -85,6 +85,8 @@ Turn agreed responsibilities into concrete interfaces, modules, types, and file 
 
 Always include a Mermaid structural or dependency diagram. Use `classDiagram` only when classes and their relationships are the clearest representation; otherwise use `flowchart`. Add a Mermaid `sequenceDiagram` when behavior crosses multiple modules or seams and ordering materially matters. When diagrams would reduce implementation ambiguity, include as many as are useful, such as dependency/structure, sequence, state, data flow, lifecycle, or module boundary diagrams. Diagrams must clarify implementation decisions rather than decorate the document, and every diagram must agree with the written responsibilities, call direction, state transitions, and data flow.
 
+Mermaid syntax guardrail: Always quote Mermaid node, edge, and subgraph labels with double quotes, for example `A["loadConfig(env)"]`. Never include `;` in `sequenceDiagram` messages. Never use `end` as a node id.
+
 ### 6. Add the TDD implementation strategy
 
 After the public interface and behavior are stable, invoke `$tdd` to produce a test-first implementation strategy rather than implementation code.
