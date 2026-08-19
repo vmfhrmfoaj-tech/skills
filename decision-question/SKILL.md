@@ -1,6 +1,6 @@
 ---
 name: decision-question
-description: Explain one technical, design, product, or policy decision in beginner-friendly language and ask the human to choose among credible alternatives. Use whenever Codex needs human judgment to resolve a trade-off, choose a contract or behavior, set a policy, or select among materially different approaches. Present a concrete analogy, a real one-line example, side-by-side outcomes, explicit gains and losses, an independent recommendation with its failure condition, and an estimated remaining-question count.
+description: Explain one technical, design, product, or policy decision in beginner-friendly language and ask the human to choose among credible alternatives. Use whenever Codex needs human judgment to resolve a trade-off, choose a contract or behavior, set a policy, or select among materially different approaches. Explain the decision's background within the larger task, then present a concrete analogy, a real one-line example, side-by-side outcomes, explicit gains and losses, an independent recommendation with its failure condition, and an estimated remaining-question count.
 ---
 
 # Decision Question
@@ -10,7 +10,7 @@ description: Explain one technical, design, product, or policy decision in begin
 ## 질문하기 전에
 
 1. 저장소, 문서, 실행 결과에서 확인할 수 있는 사실은 먼저 직접 확인한다. 발견 가능한 사실이나 사소하고 되돌리기 쉬운 구현 세부사항을 사람에게 떠넘기지 않는다.
-2. 지금 답이 필요한 결정과 그 뒤에 남은 결정을 나눈다. 현재 답이 다음 질문의 전제가 되도록 순서를 정한다.
+2. 전체 작업의 목표, 현재 단계와 그 역할, 그 안에서 지금 묻는 구체적인 대상, 이번 답이 이후 작업에 주는 영향을 구분한다. 현재 답이 다음 질문의 전제가 되도록 순서를 정한다. 전체 계획을 확인할 근거가 없으면 만들어내지 말고 확인한 범위만 설명한다.
 3. 실제로 성립하는 선택지만 남긴다. 선택지는 보통 2~3개로 제한하고, 각 선택이 버리는 것을 확인한다.
 4. 사람의 예상 선택과 독립적으로 최선의 선택을 판단한다. 근거가 약하면 추천을 꾸미지 말고 부족한 근거를 먼저 밝힌다.
 
@@ -26,13 +26,14 @@ description: Explain one technical, design, product, or policy decision in begin
 아래 순서를 지킨다.
 
 1. **결정할 것**: 전문 용어 없이 지금 결정할 내용을 한 문장으로 쓴다.
-2. **먼저 그림으로 보면**: 도메인 용어보다 먼저 일상 사물에 빗대고 ASCII 도식, 표, 또는 수치 블록으로 그린다.
-3. **실제 예**: 현재 맥락이나 저장소에서 가져온 실제 코드, 입력, 또는 데이터 한 줄을 놓는다. 근거 없이 실제 사례를 만들어내지 않는다. 실제 자료가 없으면 `가정 예시`라고 표시한다.
-4. **결과 비교**: 그 한 줄의 올바른 결과와 반드시 막아야 할 결과를 나란히 보인다.
-5. **선택지**: 각 갈래의 `얻는 것`과 `잃는 것`을 같은 표에서 비교한다. 손실 칸을 비워 두지 않는다.
-6. **추천**: 첫 문장을 반드시 `제 추천은 <선택지>입니다.`로 시작한다. 같은 자리에서 근거와 이유를 설명하고, 이어서 추천이 틀릴 수 있는 조건을 적는다.
-7. **질문**: 선택지 중 하나를 고르는 질문 하나만 굵게 쓴다.
-8. **남은 결정**: 현재 질문에 답한 뒤 남을 질문 수를 예상치로 표시하고, 앞 결정이나 새 반례에 따라 달라질 수 있다고 쓴다.
+2. **질문의 배경**: 전체적으로 무엇을 하는 작업인지, 그중 현재 어느 단계인지, 그 단계가 무엇을 하는지를 설명한다. 이어서 그 단계 안의 어떤 대상에 관한 질문인지와 이번 답에 따라 무엇이 달라지는지를 풀어서 쓴다. 단계 이름만 나열하거나 사람이 그 역할을 이미 안다고 가정하지 않는다.
+3. **먼저 그림으로 보면**: 도메인 용어보다 먼저 일상 사물에 빗대고 ASCII 도식, 표, 또는 수치 블록으로 그린다.
+4. **실제 예**: 현재 맥락이나 저장소에서 가져온 실제 코드, 입력, 또는 데이터 한 줄을 놓는다. 근거 없이 실제 사례를 만들어내지 않는다. 실제 자료가 없으면 `가정 예시`라고 표시한다.
+5. **결과 비교**: 그 한 줄의 올바른 결과와 반드시 막아야 할 결과를 나란히 보인다.
+6. **선택지**: 각 갈래의 `얻는 것`과 `잃는 것`을 같은 표에서 비교한다. 손실 칸을 비워 두지 않는다.
+7. **추천**: 첫 문장을 반드시 `제 추천은 <선택지>입니다.`로 시작한다. 같은 자리에서 근거와 이유를 설명하고, 이어서 추천이 틀릴 수 있는 조건을 적는다.
+8. **질문**: 선택지 중 하나를 고르는 질문 하나만 굵게 쓴다.
+9. **남은 결정**: 현재 질문에 답한 뒤 남을 질문 수를 예상치로 표시하고, 앞 결정이나 새 반례에 따라 달라질 수 있다고 쓴다.
 
 ## 수치 근거
 
@@ -56,6 +57,14 @@ description: Explain one technical, design, product, or policy decision in begin
 ### 결정할 것
 
 <지금 결정할 내용을 쉬운 한 문장으로>
+
+### 질문의 배경
+
+<전체적으로 진행 중인 작업과 최종 목표>
+
+<현재 어느 단계이며, 그 단계가 담당하는 역할>
+
+<그 단계 안에서 지금 묻는 구체적인 대상과 이번 답이 이후 작업에 주는 영향>
 
 ### 먼저 그림으로 보면
 
