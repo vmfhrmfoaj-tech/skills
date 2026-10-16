@@ -103,12 +103,12 @@ description: Teach a human a topic like a patient teacher until they truly under
   | 데이터 모양과 관계 | `erDiagram` 또는 `classDiagram` |
   | 바뀌기 전 / 후 | 같은 종류 그림 두 장을 나란히(`전`, `후` 제목) |
 
-- 내부 소스를 그릴 때는 그림 상자에 **`파일 : 함수`** 를 적는다(예: `extract/extract-screen.mjs : extractScreen`). 그림에서 본 것을 바로 코드에서 찾아갈 수 있게 하려는 것이다. 적은 파일·함수는 실제로 있는지 확인한다.
+- 내부 소스를 그릴 때는 그림 상자에 **`파일 : 함수`** 를 적는다(예: `src/order/checkout.ts : placeOrder`). 그림에서 본 것을 바로 코드에서 찾아갈 수 있게 하려는 것이다. 적은 파일·함수는 실제로 있는지 확인한다.
 - 그림마다 위에 한두 줄로 "이 그림에서 볼 것"을 적고, 아래에 근거 `파일:줄` 을 적는다. 문서나 코드에서 확인하지 못한 관계는 그리지 않는다. 언어·런타임의 일반 규칙(예: JavaScript 함수 스코프)은 그려도 되지만 `언어 규칙`이라고 밝힌다.
 - 파일 맨 위에 주제·개념 이름과, mermaid 를 그림으로 보려면 mermaid 를 지원하는 미리보기(예: VSCode 의 mermaid 미리보기 확장)가 필요하다는 한 줄을 둔다.
 - mermaid 문법이 깨지지 않게 한다.
-  - `flowchart`·`classDiagram` 상자 이름에 괄호·콜론·슬래시가 들어가면 따옴표로 감싼다(`A["extract/extract-screen.mjs : extractScreen"]`).
-  - `sequenceDiagram` 참여자 별칭과 `stateDiagram-v2` 이름에서는 콜론·세미콜론이 문법을 깨므로 `파일 함수`처럼 공백으로 가른다(`participant RS as extract-screen.mjs readScripts`).
+  - `flowchart`·`classDiagram` 상자 이름에 괄호·콜론·슬래시가 들어가면 따옴표로 감싼다(`A["src/order/checkout.ts : placeOrder"]`).
+  - `sequenceDiagram` 참여자 별칭과 `stateDiagram-v2` 이름에서는 콜론·세미콜론이 문법을 깨므로 `파일 함수`처럼 공백으로 가른다(`participant CO as checkout.ts placeOrder`).
   - mermaid CLI 를 쓸 수 있으면(예: `npx -y @mermaid-js/mermaid-cli@11.4.0`) 블록마다 그려 보아 문법 오류를 잡는다. 못 쓰면 눈으로 꼼꼼히 본다.
 
 ### 질문 쓰는 법
@@ -179,7 +179,7 @@ description: Teach a human a topic like a patient teacher until they truly under
   결과: <쓴 수치>
   ```
 
-- **파일은 클릭하면 열리는 링크로 가리킨다.** 대화에서 파일을 가리킬 때는 경로를 백틱 글자로만 쓰지 않고 markdown 링크로 쓴다. 저장소·작업 폴더 안 파일은 작업 폴더 기준 상대 경로(`[flow.md](docs/flow.md)`, 줄은 `[SYA0101.ts:141-147](src/SYA0101.ts#L141-L147)`), 그 밖 파일 — 기록 파일·그림 파일처럼 임시 폴더에 둔 것 — 은 **`/` 로 시작하는 절대 경로**(`[20261015-1525-flow.md](/tmp/.../diagrams/20261015-1525-flow.md)`)로 건다. 작업 폴더 밖 파일을 `../` 상대 경로로 걸면 열리지 않는다. 링크 글자는 파일 이름만 써서 짧게 하고, 경로는 `~`·`$TMPDIR` 같은 줄임 없이 실제 경로를 그대로 쓴다. 사람이 경로를 손으로 찾아 여는 동안 이해가 끊기기 때문이다.
+- **파일은 클릭하면 열리는 링크로 가리킨다.** 대화에서 파일을 가리킬 때는 경로를 백틱 글자로만 쓰지 않고 markdown 링크로 쓴다. 저장소·작업 폴더 안 파일은 작업 폴더 기준 상대 경로(`[flow.md](docs/flow.md)`, 줄은 `[checkout.ts:141-147](src/order/checkout.ts#L141-L147)`), 그 밖 파일 — 기록 파일·그림 파일처럼 임시 폴더에 둔 것 — 은 **`/` 로 시작하는 절대 경로**(`[20261015-1525-flow.md](/tmp/.../diagrams/20261015-1525-flow.md)`)로 건다. 작업 폴더 밖 파일을 `../` 상대 경로로 걸면 열리지 않는다. 링크 글자는 파일 이름만 써서 짧게 하고, 경로는 `~`·`$TMPDIR` 같은 줄임 없이 실제 경로를 그대로 쓴다. 사람이 경로를 손으로 찾아 여는 동안 이해가 끊기기 때문이다.
 - **근거 문서와 코드는 읽기만 한다.** 가르치면서 고칠 거리를 발견해도 고치지 않고 사람에게 알리기만 한다. 쓰는 파일은 기록 파일과 그림 파일뿐이고, 둘 다 저장소 밖 임시 폴더(또는 넘겨받은 기록 파일 옆)에 둔다.
 
 ## 응답 틀
