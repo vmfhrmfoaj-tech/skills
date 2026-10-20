@@ -103,7 +103,7 @@ When diagrams would reduce implementation ambiguity, include as many as are usef
 
 For each tracer bullet, state:
 
-1. **RED** — the single observable behavior test to add and why it must fail initially.
+1. **RED** — the single observable behavior test to add and why it must fail initially. For a behavior-preserving move, write "no RED" and name the safety net instead.
 2. **GREEN** — the minimum production behavior needed to pass it.
 3. **REFACTOR** — cleanup allowed only after green, including any SOLID improvement now supported by evidence.
 
@@ -118,6 +118,6 @@ Order slices from the thinnest end-to-end success path through important failure
 - File placement follows responsibility ownership.
 - Necessary diagrams are included, and every diagram matches the written dependencies and behavior.
 - Meaningful choices are agreed; remaining assumptions are explicit.
-- TDD slices are independently executable in red-green-refactor order.
+- TDD slices are independently executable in red-green-refactor order; behavior-preserving moves name their safety net.
 - The implementation boundary and the confirmation requirement for unplanned file work are explicit.
 - No implementation step exceeds the accepted design.

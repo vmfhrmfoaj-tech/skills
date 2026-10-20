@@ -7,16 +7,6 @@ description: Turn a detailed feature requirement into an implementation-ready, t
 
 Produce a decision-complete feature design grounded in the repository. Adapt the design to the project's paradigm; do not force classes, patterns, or framework conventions where modules, functions, data types, or other constructs fit better.
 
-## Required skills
-
-Before analysis, verify that these skills are installed and available:
-
-- `$improve-codebase-architecture`
-- `$grill-with-docs`
-- `$tdd`
-
-Stop if any are missing. Name every missing skill and tell the user to install it. Do not silently reproduce or bypass a required skill's workflow.
-
 ## Workflow
 
 ### 1. Ground the requirement
@@ -28,9 +18,9 @@ Stop if any are missing. Name every missing skill and tell the user to install i
 
 ### 2. Analyze the existing architecture
 
-Invoke `$improve-codebase-architecture` for the affected area. Use its analysis to identify current modules, interfaces, seams, adapters, coupling, locality, leverage, and likely responsibility candidates.
+Analyze the affected area to identify current modules, interfaces, seams, adapters, coupling, locality, leverage, and likely responsibility candidates.
 
-- Treat the requested feature as the candidate being explored; focus the architecture analysis on changes needed to support it.
+- Focus the analysis on changes needed to support the requested feature; do not survey unrelated refactors.
 - Apply the deletion test to proposed modules and abstractions.
 - Introduce a seam only for actual variation, an external system edge, or a demonstrated testing need. One adapter alone is normally a hypothetical seam.
 - Record affected files and contracts, but do not design the final interface until meaningful ownership choices have been resolved.
@@ -58,7 +48,7 @@ Use paradigm-appropriate constructs:
 
 A choice is meaningful when it changes a public contract, domain ownership, dependency direction, state ownership, failure semantics, compatibility, or the cost of future change. File naming, private helper placement, and other local reversible choices are not meaningful unless they affect one of those concerns.
 
-When two or more credible responsibility candidates remain, invoke `$grill-with-docs` and use its questioning and repository cross-checking discipline:
+When two or more credible responsibility candidates remain, use this questioning and repository cross-checking discipline:
 
 - Ask one question at a time and wait for the answer.
 - Present only credible alternatives, their consequences, and a clear recommended answer.
@@ -89,10 +79,12 @@ Mermaid syntax guardrail: Always quote Mermaid node, edge, and subgraph labels w
 
 ### 6. Add the TDD implementation strategy
 
-After the public interface and behavior are stable, invoke `$tdd` to produce a test-first implementation strategy rather than implementation code.
+After the public interface and behavior are stable, produce a test-first implementation strategy rather than implementation code.
 
+- Name the seams under test before listing slices. When the choice of seams is meaningful, resolve it with the user as in step 4.
 - Map each accepted requirement to observable behavior through a public interface.
 - Order work as vertical tracer bullets: one failing behavior test, minimal implementation to green, then the next behavior.
+- A slice that only moves code while behavior must stay unchanged has no genuine failing test. Say so, and name the safety net that guards it (existing tests at the seam, a characterization or baseline comparison) instead of manufacturing a failing test.
 - Identify unit, integration, contract, end-to-end, or other test levels only where they add distinct confidence.
 - Prefer real internal collaborators. Put test doubles at external systems, time, randomness, filesystem, or other genuine seams.
 - Include critical success, failure, edge, corner, and regression scenarios, prioritized by risk.
