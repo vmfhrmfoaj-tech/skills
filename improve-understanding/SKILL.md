@@ -19,7 +19,7 @@ description: Teach a human a topic like a patient teacher until they truly under
 
 | 입력 | 필수 | 설명 |
 |---|---|---|
-| 주제 | 예 | 무엇을 이해시킬지. 예: "extract 단계 구조안" |
+| 주제 | 예 | 무엇을 이해시킬지. 예: "주문 모듈 분리안" |
 | 근거 문서 경로들 | 예 | 가르칠 내용의 출처. 예: `flow.md`, `deepening.md`, `proposal.md` |
 | 기록 파일 경로 | 아니오 | 가르친 내용과 판정을 적을 md 파일. 없으면 아래 기본 위치에 만든다 |
 | 이해 문서 경로 | 아니오 | 같은 주제의 이해 문서가 이미 있으면 그 경로. 새로 만들지 않고 이어 쓴다 |
@@ -79,7 +79,7 @@ description: Teach a human a topic like a patient teacher until they truly under
 
 | 피할 질문 (되묻기) | 쓸 질문 (적용) |
 |---|---|
-| "extract 단계의 역할이 뭐였죠?" | "이 파일이 `pipeline/` 으로 옮겨지면, emit 단계 코드에서 고쳐야 하는 import 는 어떤 것일까요?" |
+| "결제 모듈의 역할이 뭐였죠?" | "이 파일이 `shared/` 로 옮겨지면, 주문 모듈 코드에서 고쳐야 하는 import 는 어떤 것일까요?" |
 | "seam 이 무엇인가요?" | "이 함수를 테스트할 때 가짜 파일 시스템을 끼워 넣을 수 있는 자리는 어디일까요? 왜 거기인가요?" |
 
 좋은 질문의 꼴: "만약 ~라면 무엇이 달라질까요?", "이 경우 어느 쪽에서 문제가 생길까요, 왜?", "이 줄을 ~로 바꾸면 무슨 일이 일어날까요?"
