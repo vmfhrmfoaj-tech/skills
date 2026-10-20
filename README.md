@@ -18,7 +18,7 @@ npx skills@latest add ./vmfhrmfoaj-skills
 | 스킬 | 설명 | 필수 설치 스킬 |
 | --- | --- | --- |
 | `decision-question` | 기술/설계/정책 결정 하나를 이해 문서로 설명하고, 결과 표·선택지 비교·추천과 함께 사람이 직접 고르게 질문한다. | `understanding-doc` |
-| `design-feature` | 상세 요구사항을 책임 배치·인터페이스·데이터 흐름·TDD 전략까지 담은 구현 가능한 설계로 바꾼다. | 없음 |
+| `design-feature` | 상세 요구사항을 책임 배치·인터페이스·데이터 흐름·TDD 전략까지 담은 구현 가능한 설계로 바꾼다. | `decision-question` |
 | `improve-docs` | 문서의 분절·중복·불명확한 역할을 찾아 SSOT 중심 문서 구조로 정리한다. | 없음 |
 | `improve-understanding` | 이해 문서로 숲(전체 지도)과 나무(개념)를 설명하고, 대화에서 한 덩이씩 적용 질문·판정·다시 가르치기와 확인 시험으로 이해를 확인한다. | `understanding-doc` |
 | `understanding-doc` | 결정·이해 질문 전에 사람이 읽을 이해 문서(MD + mermaid)를 만든다. 1층 전체 큰 흐름 → 2층 세부 흐름 → 3층 결정에 걸린 것(문제 지점 빨간 표시). | 없음 |
