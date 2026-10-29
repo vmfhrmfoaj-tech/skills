@@ -1,6 +1,6 @@
 ---
 name: improve-understanding
-description: Teach a human a topic like a patient teacher until they truly understand it. First build an understanding document (understanding-doc skill) whose layer 1 is the forest (whole-picture map) and whose layer 2 holds the trees (concepts in prerequisite order), then keep the chat thin — each turn recaps position on the map, links the doc section to read, and ends with one application question. The caller passes the topic, source documents, and optionally a record file path (default is the session temp folder). Judge each answer, re-teach in chat from another angle on a miss (and fix the doc section if the gap was there), and run an integrative check before declaring understanding. Use this whenever a human wants to truly understand a proposal, architecture, code flow, design document, or trade-off, says they do not understand it yet, or asks to be taught, walked through, or quizzed on it.
+description: Teach a human a topic like a patient teacher until they truly understand it. Build an understanding document (understanding-doc skill) as layer files — layer 1 is the forest (whole-picture map), made first; each tree (concept, in prerequisite order) gets its own layer 2 file made when that concept is taught — then keep the chat thin — each turn recaps position on the map, gives the three-line read-here block (layer 1, 2, 3 links), and ends with one application question. The caller passes the topic, source documents, and optionally a record file path (default is the session temp folder). Judge each answer, re-teach in chat from another angle on a miss (and write a new version of the layer file if the gap was there), and run an integrative check before declaring understanding. Use this whenever a human wants to truly understand a proposal, architecture, code flow, design document, or trade-off, says they do not understand it yet, or asks to be taught, walked through, or quizzed on it.
 ---
 
 # Improve Understanding
@@ -9,7 +9,7 @@ description: Teach a human a topic like a patient teacher until they truly under
 
 가르치는 길은 **숲 → 나무**다. 먼저 무엇을 왜 공부하는지와 전체 그림(숲)을 잡고, 그다음 개념 하나하나(나무)로 내려간다. 나무를 배우는 동안에도 매번 숲 지도에서 지금 어디인지 보여 준다. 숲 없이 나무만 쌓으면 사람은 각 개념을 알아도 그것들이 왜 거기 있는지, 서로 어떻게 이어지는지를 모른다.
 
-역할을 나눈다. **설명과 그림은 이해 문서**가 맡는다 — 큰 그림과 세부를 한 자리에 두고 다시 펼쳐 볼 수 있기 때문이다. **대화는 확인**을 맡는다 — 질문, 판정, 다시 가르치기는 사람의 답을 본 뒤에야 할 수 있기 때문이다.
+역할을 나눈다. **설명과 그림은 이해 문서**가 맡는다 — 큰 그림(1층 파일)과 개념마다의 세부(2층 파일)를 두고 다시 펼쳐 볼 수 있기 때문이다. **대화는 확인**을 맡는다 — 질문, 판정, 다시 가르치기는 사람의 답을 본 뒤에야 할 수 있기 때문이다.
 
 읽는 사람의 수준(개발을 아는 1년차 주니어)과 생활 비유를 쓰지 않는 규칙은 `../understanding-doc/SKILL.md` 를 따른다. 대화에서도 같다.
 
@@ -22,7 +22,7 @@ description: Teach a human a topic like a patient teacher until they truly under
 | 주제 | 예 | 무엇을 이해시킬지. 예: "주문 모듈 분리안" |
 | 근거 문서 경로들 | 예 | 가르칠 내용의 출처. 예: `flow.md`, `deepening.md`, `proposal.md` |
 | 기록 파일 경로 | 아니오 | 가르친 내용과 판정을 적을 md 파일. 없으면 아래 기본 위치에 만든다 |
-| 이해 문서 경로 | 아니오 | 같은 주제의 이해 문서가 이미 있으면 그 경로. 새 파일이 그 내용으로 시작한다 |
+| 이해 문서 폴더 | 아니오 | 같은 주제의 이해 문서 폴더가 이미 있으면 그 경로. 그 안의 1층과 2층 파일을 다시 쓴다 |
 
 주제나 근거 문서가 없으면 가르치기 전에 그것만 한 번 묻는다.
 
@@ -43,16 +43,16 @@ description: Teach a human a topic like a patient teacher until they truly under
    - 무엇을 공부하는가: 주제를 한두 문장으로.
    - 왜 공부하는가: 이 주제가 속한 더 큰 작업과 그 목표, 이 이해가 어디에 쓰이는가.
    - 전체 지도: 시스템(또는 작업) 전체와, 그 안에서 이번 주제의 자리.
-3. **나무** — 주제를 이해하는 데 필요한 개념 목록을 만든다. 한 개념은 문서의 한 절로 설명하고 질문 하나로 확인할 수 있는 크기다.
+3. **나무** — 주제를 이해하는 데 필요한 개념 목록을 만든다. 한 개념은 2층 파일 하나로 설명하고 질문 하나로 확인할 수 있는 크기다.
 4. 쉬운 것 → 어려운 것 순으로 놓되, **앞 개념이 뒤 개념의 전제**가 되게 한다. 뒤 개념을 설명하려고 앞에서 안 배운 말을 꺼내야 한다면 순서가 틀린 것이다. 각 개념이 숲 지도의 어느 자리에 걸리는지 정해 둔다.
-5. **이해 문서를 만든다.** `../understanding-doc/SKILL.md` 를 읽고 따른다. 목적은 `학습`, 배울 차례를 넘긴다. 1층에 숲(전체 지도와 이번 주제의 자리), 2층에 나무를 배울 차례 그대로 한 절씩 쓴다. 이미 있는 이해 문서를 받았으면 이전 이해 문서로 넘긴다 — 새 파일이 그 내용으로 시작하고 없는 절만 덧붙인다.
+5. **1층 파일을 만든다.** `../understanding-doc/SKILL.md` 를 읽고 따른다. 목적은 `학습`, 배울 개념은 넘기지 않는다 — 1층에 숲(전체 지도와 이번 주제의 자리)만 쓴다. 나무의 2층 파일은 그 개념을 가르칠 때 만든다. 이미 있는 이해 문서 폴더를 받았으면 그 폴더를 넘긴다 — 1층과 이미 있는 2층 파일을 다시 쓴다.
 
 ## 첫 응답: 숲
 
 첫 응답은 나무를 묻지 않고 숲만 다룬다.
 
 - 무엇을 공부하는지, 왜 공부하는지를 두세 줄로.
-- 이해 문서 링크와 "1층을 읽어 주세요".
+- 읽을 곳 블록(1층 `새로`, 2층·3층 `없음`)과 "1층을 읽어 주세요".
 - 배울 길: 개념 이름을 차례대로. 표로 쓸 때 전제 칸에도 차례 번호가 아니라 개념 이름을 쓴다.
 - 기록 파일 링크.
 - 확인 질문 하나 — **숲 질문**. 큰 그림을 적용하게 하는 질문이다. 예: "이 작업이 끝나면 산출물 쪽에서는 무엇이 그대로여야 할까요?", "이 단계의 출력이 바뀌면 지도에서 어느 쪽이 영향을 받을까요?"
@@ -66,7 +66,7 @@ description: Teach a human a topic like a patient teacher until they truly under
 순서는 아래를 지킨다.
 
 1. **이전의 정리** — 지금까지 배운 것을 두세 줄로 묶고, 숲 지도의 작은 판(ASCII 한 줄이면 충분하다)에 지금 위치를 표시한다. 바로 앞 판정에서 이미 정리한 내용은 되풀이하지 않는다.
-2. **지금 배울 것** — 이번 개념을 한 문장으로, 숲에서 왜 필요한지 한 줄로, 그리고 읽을 문서 절의 링크.
+2. **지금 배울 것** — 이번 개념을 한 문장으로, 숲에서 왜 필요한지 한 줄로, 그리고 읽을 곳 블록. 이번 개념의 2층 파일이 폴더에 없으면 이때 `../understanding-doc/SKILL.md` 를 따라 만든다(목적 `학습`, 배울 개념은 이번 개념 하나, 이해 문서 폴더를 넘긴다). 2층 줄은 이번 개념 파일이고, 앞서 배운 개념 파일은 다시 링크하지 않는다.
 3. **확인 질문** — 아래 질문 쓰는 법을 따른다. 질문은 그 절을 읽고 새 상황에 옮겨야 답할 수 있어야 한다.
 
 대화에 문서 내용을 옮겨 적지 않는다. 대화가 길어지면 핵심 관계가 묻히고, 문서와 대화가 서로 다른 말을 하게 된다. 다음 개념에서 다룰 내용을 미리 당겨 오지 않는다.
@@ -97,14 +97,14 @@ description: Teach a human a topic like a patient teacher until they truly under
 | 틀림 | 결론이 틀렸다. "모르겠다"도 여기에 넣는다(탓하지 않는다) | 어긋난 곳을 짚고, **다른 각도**로 다시 설명한 뒤 다시 묻는다 |
 
 - **다시 가르치기는 대화에서** 한다. 사람이 어긋난 지점 하나를 겨눠야 하기 때문이다. 문서와 다른 각도를 고른다 — 단계마다 무엇을 아는지 보이는 작은 표, ASCII 그림, 다른 코드 줄, 개발 경험 예 가운데 어긋난 지점을 가장 잘 보여 주는 것. 같은 설명을 되풀이하면 같은 곳에서 다시 어긋난다.
-- 어긋난 까닭이 **문서에 있으면**(빠진 연결, 헷갈리는 그림, 틀린 줄) 그 절을 고치고 고쳤다고 알린다. 다음 사람이 같은 곳에서 막히지 않게 하려는 것이다.
+- 어긋난 까닭이 **문서에 있으면**(빠진 연결, 헷갈리는 그림, 틀린 줄) 그 층 파일의 새 판을 만들고, 새 판 링크와 무엇을 고쳤는지 알린다. 이미 링크한 파일은 고치지 않는다(`../understanding-doc/SKILL.md` 의 층마다 파일 하나). 다음 사람이 같은 곳에서 막히지 않게 하려는 것이다.
 - 다시 물을 때는 같은 질문을 되풀이하지 말고 같은 개념을 보는 다른 상황으로 묻는다. 같은 질문이면 앞 설명을 기억해서 맞힐 수 있다. 다시 가르친 설명은 원리를 충분히 말하되, 새 질문의 답을 문장 그대로 담지 않는다 — 원리를 새 상황에 옮겨야 답이 나오게 한다.
-- 같은 개념에서 두 번 다시 가르쳐도 못 넘으면, 그 개념의 **전제**가 빠졌을 가능성이 크다. 더 작은 개념으로 쪼개 문서에 절을 끼워 넣고 그것부터 가르친다.
+- 같은 개념에서 두 번 다시 가르쳐도 못 넘으면, 그 개념의 **전제**가 빠졌을 가능성이 크다. 더 작은 개념으로 쪼개 그 개념의 2층 파일을 만들고, 배울 차례에 끼워 넣어 그것부터 가르친다.
 - 이유 없이 결론만 맞힌 답("A 요")은 이유를 한 번 더 묻는다. 찍어서 맞힌 것과 구별할 수 없기 때문이다. 이 되묻기는 그 응답의 유일한 질문이 된다.
 
 ## 사람이 먼저 물을 때
 
-사람이 중간에 질문하면 그 질문에 먼저 답한다. 짧으면 대화에서, 그림이 필요하면 문서에 절을 더하고 링크한다. 그 뒤 진행 중이던 덩이로 돌아가 이해 질문 하나로 끝낸다. 사람이 다른 주제로 더 배우고 싶어 하면 그 개념을 배울 차례와 문서에 더하고 기록한다.
+사람이 중간에 질문하면 그 질문에 먼저 답한다. 짧으면 대화에서, 그림이 필요하면 2층 파일을 하나 더 만들고 링크한다. 그 뒤 진행 중이던 덩이로 돌아가 이해 질문 하나로 끝낸다. 사람이 다른 주제로 더 배우고 싶어 하면 그 개념을 배울 차례에 더하고 기록한다. 2층 파일은 그 개념을 가르칠 때 만든다.
 
 ## 이해 선언과 확인 시험
 
@@ -125,14 +125,14 @@ description: Teach a human a topic like a patient teacher until they truly under
 
 1. 가르치기를 멈춘다. 새 이해 질문을 내지 않는다.
 2. 기록 파일을 마무리한다.
-3. 가르치기가 끝났다는 사실과 기록 파일·이해 문서 위치를 알리고, 대화를 부른 쪽의 흐름에 돌려준다.
+3. 가르치기가 끝났다는 사실과 기록 파일·이해 문서 폴더 위치를 알리고, 대화를 부른 쪽의 흐름에 돌려준다.
 
 사람이 "그만하자"처럼 중간에 멈추길 원하면, 기록 파일에 중단 지점과 남은 개념을 적고 멈춘다.
 
 ## 지킬 것
 
 - 이름 규칙(번호·약칭만으로 부르지 않기), 사실 만들지 않기, 수치 출처, 파일 링크, 근거 읽기만 하기는 `../understanding-doc/SKILL.md` 의 지킬 것·링크 절을 대화에도 똑같이 적용한다.
-- 쓰는 파일은 기록 파일과 이해 문서뿐이고, 둘 다 저장소 밖 임시 폴더(또는 넘겨받은 경로)에 둔다.
+- 쓰는 파일은 기록 파일과 이해 문서 폴더의 층 파일뿐이고, 둘 다 저장소 밖 임시 폴더(또는 넘겨받은 경로)에 둔다.
 - 대화의 표 위에 붙는 작은 제목은 굵은 글씨 문단이 아니라 `####` 제목으로 쓴다.
 
 ## 응답 틀
@@ -150,13 +150,18 @@ description: Teach a human a topic like a patient teacher until they truly under
 
 ### 이해 문서
 
-[<파일 이름>](</로 시작하는 절대 경로>) — 먼저 **1층**을 읽어 주세요.
+읽을 곳:
+- 1층 <풀어 쓴 이름> (새로): [1-overview.md](</로 시작하는 절대 경로>)
+- 2층: 없음 (개념마다 배울 때 만듭니다)
+- 3층: 없음
+
+먼저 **1층**을 읽어 주세요.
 
 ### 배울 길
 
-| 차례 | 개념 | 문서 절 | 먼저 알아야 할 개념(이름으로) |
-|---|---|---|---|
-| 1 | <개념을 풀어 쓴 이름> | 2층 <절 이름> | 없음 |
+| 차례 | 개념 | 먼저 알아야 할 개념(이름으로) |
+|---|---|---|
+| 1 | <개념을 풀어 쓴 이름> | 없음 |
 
 기록 파일: [<파일 이름>](</로 시작하는 절대 경로>)
 
@@ -178,7 +183,10 @@ description: Teach a human a topic like a patient teacher until they truly under
 
 <한 문장 + 숲에서 왜 필요한지 한 줄>
 
-읽을 곳: 이해 문서 2층 **<절 이름>** — [<파일 이름>](</로 시작하는 절대 경로>)
+읽을 곳:
+- 1층 <풀어 쓴 이름> (앞과 같음): [1-overview.md](</로 시작하는 절대 경로>)
+- 2층 <개념 이름> (<새로 / 새 판>): [2-<…>.md](</로 시작하는 절대 경로>)
+- 3층: 없음
 
 ### 확인 질문
 
@@ -193,7 +201,7 @@ description: Teach a human a topic like a patient teacher until they truly under
 <맞은 곳 한 줄 · 어긋난 곳 한 줄>
 
 <다시 가르치기면 "이번에는 <바꾼 각도>로 봅니다" + 표·ASCII·코드 줄 가운데 하나>
-<문서를 고쳤으면 "문서의 <절>을 고쳤습니다: <무엇을>">
+<새 판을 만들었으면 "<층> 새 판을 만들었습니다: <무엇을> — [<파일 이름>](</로 시작하는 절대 경로>)">
 
 ### 확인 질문
 
@@ -211,7 +219,7 @@ description: Teach a human a topic like a patient teacher until they truly under
 
 - 시작: <YYYY-MM-DD>
 - 근거 문서: <경로들>
-- 이해 문서: <경로>
+- 이해 문서 폴더: <경로>
 
 ## 숲
 
@@ -224,19 +232,19 @@ description: Teach a human a topic like a patient teacher until they truly under
 
 ## 배울 차례
 
-| 차례 | 개념 | 문서 절 | 전제 |
+| 차례 | 개념 | 2층 파일 | 전제 |
 |---|---|---|---|
-| 1 | <개념을 풀어 쓴 이름> | <절> | 없음 |
-| 2 | <…> | <절> | <앞 개념 이름> |
+| 1 | <개념을 풀어 쓴 이름> | <파일 이름, 아직이면 "아직"> | 없음 |
+| 2 | <…> | <…> | <앞 개념 이름> |
 
 ## 가르친 개념
 
 ### <개념 이름>
 
 - 가르친 요지: <한두 줄>
-- 문서 절: <절 이름>
+- 2층 파일: <파일 이름>
 - 다시 가르친 각도: <표·그림·코드 줄·개발 예> 또는 "없음"
-- 고친 문서 절: <절과 무엇을> 또는 "없음"
+- 새 판: <파일과 무엇을> 또는 "없음"
 - 다시 가르친 횟수: <N>
 
 | 시도 | 질문 | 사람의 답(요약) | 판정과 이유 |

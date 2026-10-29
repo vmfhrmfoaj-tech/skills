@@ -48,8 +48,10 @@ Use paradigm-appropriate constructs:
 
 A choice is meaningful when it changes a public contract, domain ownership, dependency direction, state ownership, failure semantics, compatibility, or the cost of future change. File naming, private helper placement, and other local reversible choices are not meaningful unless they affect one of those concerns.
 
-When two or more credible responsibility candidates remain, ask each question by reading and following `../decision-question/SKILL.md`. It owns the question format, one question per turn, and the understanding document the human reads first; on later questions pass the understanding document already built as the previous one. Add this design-specific discipline:
+When two or more credible responsibility candidates remain, use this questioning and repository cross-checking discipline:
 
+- Ask one question at a time and wait for the answer.
+- Present only credible alternatives, their consequences, and a clear recommended answer.
 - Explain the recommendation using cohesion, coupling, locality, leverage, SOLID, and testability.
 - Probe concrete success, failure, concurrency, lifecycle, and compatibility scenarios when relevant.
 - Continue until ownership, interface direction, and important invariants are agreed.

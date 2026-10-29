@@ -1,6 +1,6 @@
 ---
 name: decision-question
-description: Explain one technical, design, product, or policy decision in beginner-friendly language and ask the human to choose among credible alternatives. Use whenever Codex needs human judgment to resolve a trade-off, choose a contract or behavior, set a policy, or select among materially different approaches. First build or extend an understanding document (understanding-doc skill) that carries the background and diagrams, then keep the chat thin — the decision, a link to the relevant layer, one real code line, a correct-vs-must-prevent outcome table, a per-option outcome table, named options with gains and losses and the recommended one marked, an independent recommendation with its failure condition, and an estimated remaining-question count.
+description: Explain one technical, design, product, or policy decision in beginner-friendly language and ask the human to choose among credible alternatives. Use whenever Codex needs human judgment to resolve a trade-off, choose a contract or behavior, set a policy, or select among materially different approaches. First build the understanding document's layer files (understanding-doc skill) — reuse the topic's layer 1 and existing layer 2 files, add only the missing layer 2 and this decision's layer 3 — then keep the chat thin — the decision, a three-line read-here block linking layer 1, 2, and 3, one real code line, a correct-vs-must-prevent outcome table, a per-option outcome table, named options with gains and losses and the recommended one marked, an independent recommendation with its failure condition, and an estimated remaining-question count.
 ---
 
 # Decision Question
@@ -11,7 +11,7 @@ description: Explain one technical, design, product, or policy decision in begin
 
 1. 저장소, 문서, 실행 결과에서 확인할 수 있는 사실은 먼저 직접 확인한다. 발견 가능한 사실이나 사소하고 되돌리기 쉬운 구현 세부사항을 사람에게 떠넘기지 않는다.
 2. 전체 작업의 목표, 현재 단계와 그 역할, 그 안에서 지금 묻는 구체적인 대상, 이번 답이 이후 작업에 주는 영향을 구분한다. 현재 답이 다음 질문의 전제가 되도록 순서를 정한다. 전체 계획을 확인할 근거가 없으면 만들어내지 말고 확인한 범위만 설명한다.
-3. **이해 문서를 만든다.** `../understanding-doc/SKILL.md` 를 읽고 따른다. 목적은 `결정`, 결정 대상 한 줄을 넘긴다. 같은 주제의 이해 문서가 이미 있으면 그 경로를 이전 이해 문서로 넘긴다 — 새 파일이 그 내용으로 시작하고 3층(결정에 걸린 것)을 덧붙인다. 문제 지점은 그림에서 빨간색으로 표시한다.
+3. **이해 문서를 만든다.** `../understanding-doc/SKILL.md` 를 읽고 따른다. 목적은 `결정`, 결정 대상 한 줄을 넘긴다. 같은 주제의 이해 문서 폴더가 이미 있으면 그 폴더를 넘긴다 — 1층과 이미 있는 2층 파일은 그대로 다시 쓰고, 없는 2층 파일과 이번 결정의 3층 파일만 새로 생긴다. 문제 지점은 3층 그림에서 빨간색으로 표시한다.
 4. 실제로 성립하는 선택지만 남긴다. 선택지는 보통 2~3개로 제한하고, 각 선택이 버리는 것을 확인한다.
 5. 사람의 예상 선택과 독립적으로 최선의 선택을 판단한다. 근거가 약하면 추천을 꾸미지 말고 부족한 근거를 먼저 밝힌다.
 
@@ -29,7 +29,7 @@ description: Explain one technical, design, product, or policy decision in begin
 아래 순서를 지킨다.
 
 1. **결정할 것**: 전문 용어 없이 지금 결정할 내용을 한 문장으로 쓴다.
-2. **질문의 배경**: 이해 문서 링크와 읽을 층·절을 적고, 그 층의 요지를 두세 줄로 쓴다. 문서 내용을 대화에 옮겨 적지 않는다.
+2. **질문의 배경**: understanding-doc 이 넘긴 읽을 곳 블록(1층·2층·3층 세 줄과 `새로`·`앞과 같음`·`새 판` 표시)을 그대로 놓고, 이번에 새로 읽을 층의 요지를 두세 줄로 쓴다. 문서 내용을 대화에 옮겨 적지 않는다.
 3. **실제 예**: 결정이 바꾸는 실제 코드, 입력, 또는 데이터 한 줄을 `파일:줄` 링크와 함께 놓는다. 인용 전에 그 줄을 실제로 읽는다. 실제 줄이 없으면 `의사코드 — 실제 코드 아님`이라고 표시한다.
 4. **어떤 선택지든 지켜야 할 것**: 올바른 결과와 반드시 막아야 할 결과를 나란히 보인다. 선택지와 무관하게 이 결정이 지켜야 할 기준이다. 지금 상태가 막아야 할 결과라면 그렇다고 쓴다.
 5. **선택지마다 이 줄의 결과**: 같은 실제 줄이 선택지마다 어떻게 되는지, 그 결과가 위 기준을 지키는지 한 표에 보인다.
@@ -62,7 +62,7 @@ description: Explain one technical, design, product, or policy decision in begin
 
 - 말투를 압축하라는 규칙이 있어도 설명·추천·질문은 끊긴 조각말 대신 완전한 문장으로 쓴다. 처음 보는 사람에게는 문장 사이의 "그래서"·"왜냐하면"이 내용의 절반이다.
 - 생활 비유는 쓰지 않는다. 필요하면 개발 경험(이미 아는 도구·관례)에 빗댄다.
-- 파일은 클릭하면 열리는 markdown 링크로 가리킨다. 저장소 안 파일은 작업 폴더 기준 상대 경로, 이해 문서처럼 저장소 밖 파일은 `/` 로 시작하는 절대 경로.
+- 파일은 클릭하면 열리는 markdown 링크로 가리킨다. 저장소 안 파일은 작업 폴더 기준 상대 경로, 층 파일처럼 저장소 밖 파일은 `/` 로 시작하는 절대 경로.
 - 표 위에 붙는 작은 제목은 굵은 글씨 문단이 아니라 `####` 제목으로 쓴다. 굵은 글씨 문단은 위의 코드 블록·표에 바짝 붙어 읽기 어렵다.
 
 ## 출력 틀
@@ -76,9 +76,12 @@ description: Explain one technical, design, product, or policy decision in begin
 
 ### 질문의 배경
 
-이해 문서의 <층·절>을 봐 주세요(빨간 선이 문제 지점입니다): [<파일 이름>](</로 시작하는 절대 경로>)
+읽을 곳:
+- 1층 <풀어 쓴 이름> (<새로 / 앞과 같음 / 새 판>): [1-overview.md](</로 시작하는 절대 경로>)
+- 2층 <풀어 쓴 이름> (<표시>): [2-<…>.md](</로 시작하는 절대 경로>)
+- 3층 <풀어 쓴 이름> (<표시>, 빨간 선이 문제 지점): [3-<…>.md](</로 시작하는 절대 경로>)
 
-<그 층의 요지 두세 줄 — 전체 작업, 현재 단계, 지금 묻는 대상, 이번 답이 바꾸는 것>
+<새로 읽을 층의 요지 두세 줄 — 전체 작업, 현재 단계, 지금 묻는 대상, 이번 답이 바꾸는 것>
 
 ### 실제 예
 
